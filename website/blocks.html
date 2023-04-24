@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>NovaSol ~ Blocks</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta name="author" content="The NovaSol Developers">
+  <meta name="keywords" content="novasol, xns, cryptocurrency, private, fast, secure, mining, pool, miningpool">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google -->
+  <meta itemprop="name" content="NovaSol ~ Blocks">
+  <meta itemprop="description" content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta itemprop="image" content="https://novasol.network/img/logo-banner-twitter.png">
+
+  <!-- Facebook -->
+  <meta property="og:url" content="https://pool.novasol.network/blocks">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="NovaSol ~ Blocks">
+  <meta property="og:description" content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta property="og:image" content="https://novasol.network/img/logo-banner-twitter.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@NovaSolProject">
+  <meta name="twitter:title" content="NovaSol ~ Blocks">
+  <meta name="twitter:description" content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta name="twitter:image" content="https://novasol.network/img/logo-banner-twitter.png">
+
+  <link rel="shortcut icon" type="image/png" href="img/logo.svg">
+
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top justify-content-between mb-3">
+      <div class="container">
+        <a class="navbar-brand  translatable" href="/">
+          <img src="/img/logo-text.svg" alt="NovaSol">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link translatable" href="/" data-translate-key="dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link translatable" href="start" data-translate-key="gettingStarted">Getting Started</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link translatable" href="statistics" data-translate-key="yourStats">My Stats</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownDetails" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                data-translate-key="details">Details</a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownDetails" id="detailsMenu">
+                <a class="dropdown-item translatable active" href="blocks" data-translate-key="poolBlocks">Pool
+                  Blocks</a>
+                <a class="dropdown-item translatable" href="payments" data-translate-key="payments">Payments</a>
+                <a class="dropdown-item translatable" href="top" data-translate-key="top10miners">Top 10 Miners</a>
+                <a class="dropdown-item translatable" href="market" data-translate-key="market">Market /
+                  Calculator</a>
+                <a class="dropdown-item translatable" href="settings" data-translate-key="settings">Settings</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item translatable" href="faq" data-translate-key="faq">FAQ</a>
+              </div>
+            </li>
+            <li class="nav-item ml-md-4 d-none" id="langSelector"></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="statistics" class="statistics pb-2" style="padding-top: 6.25rem;">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="row align-items-center mb-4">
+              <div class="col">
+                <h6 class="m-0 font-weight-bold text-muted" data-translate-key="poolBlocks">Pool Blocks</h6>
+              </div>
+              <div class="col-auto d-none">
+                <ul class="nav nav-pills" id="blocksTabs" role="tablist"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="tab-content" id="blocksContent"></div>
+
+    <script id="siblingTabTemplate" type="text/x-handlebars-template">
+            <li class="nav-item" id="blockTab{{coin}}">
+                <a class="nav-link {{active}}" id="{{coin}}-tab" data-toggle="tab" href="#{{coin}}" role="tab" aria-controls="{{coin}}" aria-selected="true" data-coin="{{coin}}">{{coin}} {{symbol}}</a>
+            </li>
+        </script>
+
+    <script id="siblingTemplate" type="text/x-handlebars-template">
+            <div class="tab-pane {{active}}" id="{{coin}}" role="tabpanel" aria-labelledby="{{coin}}-tab">
+                <div class="container mb-5 pb-5">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card shadow-light yourStats{{coin}} mb-5">
+                                <div class="card-group card-border">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="list-group list-group-flush">
+                                                <div class="list-group-item d-flex align-items-center">
+                                                    <div class="mr-auto">
+                                                        <h5 class="font-weight-bold mb-1">
+                                                            <span id="blocksTotal{{coin}}">N/A</span> <span class="smallText">(<span id="lastBlockFound{{coin}}">Never</span>)</span>
+                                                        </h5>
+                                                        <p class="font-size-sm text-muted mb-0" data-translate-key="blocksTotal">Total Prop Blocks Mined</p>
+                                                    </div>
+                                                </div>
+                                                <div class="list-group-item d-flex align-items-center">
+                                                    <div class="mr-auto">
+                                                        <h5 class="font-weight-bold mb-1">
+                                                            <span id="blocksTotalSolo{{coin}}">N/A</span> <span class="smallText">(<span id="lastBlockFoundSolo{{coin}}">Never</span>)</span>
+                                                        </h5>
+                                                        <p class="font-size-sm text-muted mb-0" data-translate-key="blocksTotalSolo">Total Solo Blocks Mined</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card border-left-md">
+                                        <div class="card-body">
+                                            <div class="list-group list-group-flush">
+                                                <div class="list-group-item d-flex align-items-center">
+                                                    <div class="mr-auto">
+                                                        <h5 class="font-weight-bold mb-1">
+                                                            <span id="blocksMaturityCount{{coin}}">N/A</span>
+                                                        </h5>
+                                                        <p class="font-size-sm text-muted mb-0" data-translate-key="blocksMaturityCount">Maturity Requirement</p>
+                                                    </div>
+                                                </div>
+                                                <div class="list-group-item d-flex align-items-center">
+                                                    <div class="mr-auto">
+                                                        <h5 class="font-weight-bold mb-1">
+                                                            <span id="averageLuck{{coin}}">N/A</span>
+                                                        </h5>
+                                                        <p class="font-size-sm text-muted mb-0" data-translate-key="averageLuck">Average Luck</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow-light blocksChart{{coin}}">
+                                <div class="card-header font-weight-bold text-muted">
+                                    <h6 class="m-0" id="blocksChartTitle{{coin}}" data-translate-key="blocksChartTitle">Blocks found</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart" style="height: 200px;">
+                                        <canvas id="blocksChartObj{{coin}}"></canvas>
+                                        <a class="chart-style"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <section id="workers-table" class="workers-table bg-light">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card card-border shadow-lg overflow-hidden">
+                                    <div id="blocksReport" class="table-responsive">
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" style="border-top:0px;"><span data-translate-key="timeFound">Time Found</span></th>
+                                                    <th scope="col" style="border-top:0px;"><span data-translate-key="reward">Reward</span></th>
+                                                    <th scope="col" style="border-top:0px;"><span data-translate-key="height">Height</span></th>
+                                                    <th scope="col" style="border-top:0px;"><span data-translate-key="difficulty">Difficulty</span></th>
+                                                    <th scope="col" style="border-top:0px;"><span data-translate-key="blockHash">Block Hash</span></th>
+                                                    <th scope="col" style="border-top:0px;"><span data-translate-key="miner">Miner Address</span></th>
+                                                    <th scope="col" style="border-top:0px;"><span data-translate-key="effort">Effort</span></th>
+                                                    <th scope="col" style="border-top:0px;" title="How many more blocks network must mine before this block is matured"><span data-translate-key="status">Status</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="small-row" id="blocksReport{{coin}}_rows"></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="card-footer text-muted text-center no-border pt-4">
+                                        <button class="btn btnTon" id="loadMoreBlocks{{coin}}" data-translate-key="loadMore">Load more</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </script>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-details row">
+        <div class="col-md-4 col-lg-3 footer-widget">
+          <a href="https://novasol.network" target="_blank"><img src="/img/logo-text.svg" class="logo mb-2"
+              alt="NovaSol"></a>
+        </div>
+        <div class="col-md-4 col-lg-3 offset-lg-3 footer-widget">
+          <h5 class="widget-title text-uppercase">Quick Links</h5>
+          <ul class="text-muted">
+            <li><a href="https://explorer.novasol.network" class="text-reset">Block Explorer</a></li>
+            <li><a href="https://pool.novasol.network" class="text-reset">Official Pool</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-lg-3 footer-widget pl-lg-5 pl-3">
+          <h6 class="widget-title text-uppercase">Get in touch</h6>
+          <div class="social text-muted">
+            <a href="https://discord.gg/7VzyputumB" class="discord text-reset" target="_blank"><i
+                class="fab fa-discord"></i></a>
+            <a href="https://twitter.com/NovaSolNetwork" class="twitter text-reset" target="_blank"><i
+                class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/NovaSolNetwork" class="instagram text-reset" target="_blank"><i
+                class="fab fa-instagram"></i></a>
+            <a href="https://github.com/NovaSolNetwork" class="github text-reset" target="_blank"><i
+                class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!--====== Javascript & Jquery ======-->
+  <script src="/config.js"></script>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/bootstrap.bundle.js"></script>
+  <script src="/vendor/mustache/mustache.min.js"></script>
+  <script src="/vendor/timeago/jquery.timeago.js"></script>
+  <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
+  <script src="/js/translate.min.js"></script>
+  <script src="/js/app.min.js"></script>
+  <script src="/js/blocks.min.js"></script>
+</body>
+
+</html>

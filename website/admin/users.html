@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>NovaSol ~ Users | Admin</title>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta name="author" content="The NovaSol Developers">
+  <meta name="keywords" content="novasol, xns, cryptocurrency, private, fast, secure, mining, pool, miningpool">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google -->
+  <meta itemprop="name" content="NovaSol ~ Users | Admin">
+  <meta itemprop="description"
+    content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta itemprop="image" content="https://novasol.network/img/logo-banner-twitter.png">
+
+  <!-- Facebook -->
+  <meta property="og:url" content="https://pool.novasol.network/admin/users">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="NovaSol ~ Users | Admin">
+  <meta property="og:description"
+    content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta property="og:image" content="https://novasol.network/img/logo-banner-twitter.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@NovaSolProject">
+  <meta name="twitter:title" content="NovaSol ~ Users | Admin">
+  <meta name="twitter:description"
+    content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta name="twitter:image" content="https://novasol.network/img/logo-banner-twitter.png">
+
+  <link rel="shortcut icon" type="image/png" href="img/logo.svg">
+
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top justify-content-between mb-3">
+      <div class="container">
+        <a class="navbar-brand  translatable" href="/">
+          <img src="/img/logo-text.svg" alt="NovaSol">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link translatable" href="./">Statistics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link translatable" href="monitor.html">Monitoring</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link translatable active" href="users.html">Users List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link translatable" href="/">Return to Pool</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="statistics" class="statistics">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="card shadow-light">
+              <div class="card-header font-weight-bold text-muted">
+                <h6 class="m-0">Users List (<span id="totalUsers">0</span> users)</h6>
+              </div>
+              <div class="table-responsive">
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col" style="border-top:0px;">Wallet</th>
+                      <th scope="col" style="border-top:0px;">Hashrate</th>
+                      <th scope="col" style="border-top:0px;">Hashes</th>
+                      <th scope="col" style="border-top:0px;">Pending</th>
+                      <th scope="col" style="border-top:0px;">Paid</th>
+                      <th scope="col" style="border-top:0px;">Last share</th>
+                    </tr>
+                  </thead>
+                  <tbody class="small-row" id="template"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script id="usersListTable" type="text/x-handlebars-template">
+            {{#each users}}
+            <tr>
+                <td class="col1"><a href="/statistics?{{this.coin}}={{this.miner}}"><strong>{{this.minerLabel}}</strong></a></td>
+                <td class="col2" data-sort="{{this.wallet.hashrate}}">{{this.readableHashrate}}</td>
+                <td class="col3" data-sort="{{this.wallet.hashes}}">{{this.readableHashes}}</td>
+                <td class="col4" data-sort="{{this.wallet.pending}}">{{this.readablePending}}</td>
+                <td class="col5" data-sort="{{this.wallet.paid}}">{{this.readablePaid}}</td>
+                <td class="col6" data-sort="{{this.wallet.lastShare}}">{{this.timeago}}</td>
+            </tr>
+            {{/each}}
+        </script>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-details row">
+        <div class="col-md-4 col-lg-3 footer-widget">
+          <a href="https://novasol.network" target="_blank"><img src="/img/logo-text.svg" class="logo mb-2"
+              alt="NovaSol"></a>
+        </div>
+        <div class="col-md-4 col-lg-3 offset-lg-3 footer-widget">
+          <h5 class="widget-title text-uppercase">Quick Links</h5>
+          <ul class="text-muted">
+            <li><a href="https://explorer.novasol.network" class="text-reset">Block Explorer</a></li>
+            <li><a href="https://pool.novasol.network" class="text-reset">Official Pool</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-lg-3 footer-widget pl-lg-5 pl-3">
+          <h6 class="widget-title text-uppercase">Get in touch</h6>
+          <div class="social text-muted">
+            <a href="https://discord.gg/7VzyputumB" class="discord text-reset" target="_blank"><i
+                class="fab fa-discord"></i></a>
+            <a href="https://twitter.com/NovaSolNetwork" class="twitter text-reset" target="_blank"><i
+                class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/NovaSolNetwork" class="instagram text-reset" target="_blank"><i
+                class="fab fa-instagram"></i></a>
+            <a href="https://github.com/NovaSolNetwork" class="github text-reset" target="_blank"><i
+                class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!--====== Javascript & Jquery ======-->
+  <script src="/config.js"></script>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/bootstrap.bundle.js"></script>
+  <script src="/vendor/mustache/mustache.min.js"></script>
+  <script src="/vendor/timeago/jquery.timeago.js"></script>
+  <script src="/vendor/handlebars/handlebars.min.js"></script>
+  <script src="/js/translate.min.js"></script>
+  <script src="/js/app.min.js"></script>
+  <script src="/js/admin/users.min.js"></script>
+</body>
+
+</html>

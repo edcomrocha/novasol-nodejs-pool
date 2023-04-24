@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>NovaSol ~ Monitor | Admin</title>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta name="author" content="The NovaSol Developers">
+  <meta name="keywords" content="novasol, xns, cryptocurrency, private, fast, secure, mining, pool, miningpool">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google -->
+  <meta itemprop="name" content="NovaSol ~ Monitor | Admin">
+  <meta itemprop="description"
+    content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta itemprop="image" content="https://novasol.network/img/logo-banner-twitter.png">
+
+  <!-- Facebook -->
+  <meta property="og:url" content="https://pool.novasol.network/admin/monitor">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="NovaSol ~ Monitor | Admin">
+  <meta property="og:description"
+    content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta property="og:image" content="https://novasol.network/img/logo-banner-twitter.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@NovaSolProject">
+  <meta name="twitter:title" content="NovaSol ~ Monitor | Admin">
+  <meta name="twitter:description"
+    content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta name="twitter:image" content="https://novasol.network/img/logo-banner-twitter.png">
+
+  <link rel="shortcut icon" type="image/png" href="img/logo.svg">
+
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top justify-content-between mb-3">
+      <div class="container">
+        <a class="navbar-brand  translatable" href="/">
+          <img src="/img/logo-text.svg" alt="NovaSol">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link translatable" href="./">Statistics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link translatable active" href="monitor.html">Monitoring</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link translatable" href="users.html">Users List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link translatable" href="/">Return to Pool</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="statistics" class="statistics">
+      <div class="container">
+        <div class="row">
+          <div class="col-12" id="monitoringInfoView"></div>
+        </div>
+      </div>
+    </section>
+
+    <script id="monitoringInfo" type="text/x-handlebars-template">
+            <div class="row mb-5">
+                <div class="infos col-sm-6">
+                    <div class="card shadow-light">
+                        <div class="card-header font-weight-bold text-muted">
+                            <h6 class="m-0">Daemon</h6>
+                        </div>
+                        <div class="card-group card-border">
+                            <div class="card">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <strong>Last check:</strong> <code>{{monitoringDaemon.lastCheck}}</code>
+                                        </li>
+                                        <li>
+                                            <strong>Last status:</strong>
+                                            <code><span id="daemonStatus" class="text-uppercase">{{monitoringDaemon.lastStatus}}</span></code>
+                                        </li>
+                                        <li>
+                                            <strong>Last response:</strong>
+                                            <pre class="formatted">{{monitoringDaemon.lastResponse}}</pre>
+                                        </li>
+                                        <li>
+                                            <strong>Last fail:</strong>
+                                            <code>{{monitoringDaemon.lastFail}}</code>
+                                        </li>
+                                        <li>
+                                            <strong>Last fail response:</strong>
+                                            <pre class="formatted">{{monitoringDaemon.lastFailResponse}}</pre>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="infos col-sm-6">
+                    <div class="card shadow-light">
+                        <div class="card-header font-weight-bold text-muted">
+                            <h6 class="m-0">Wallet</h6>
+                        </div>
+                        <div class="card-group card-border">
+                            <div class="card">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <strong>Last check:</strong>
+                                            <code>{{monitoringWallet.lastCheck}}</code>
+                                        </li>
+                                        <li>
+                                            <strong>Last status:</strong>
+                                            <code><span id="walletStatus" class="text-uppercase">{{monitoringWallet.lastStatus}}</span></code>
+                                        </li>
+                                        <li>
+                                            <strong>Last response:</strong>
+                                            <pre class="formatted">{{monitoringWallet.lastResponse}}</pre>
+                                        </li>
+                                        <li>
+                                            <strong>Last fail:</strong>
+                                            <code>{{monitoringWallet.lastFail}}</code>
+                                        </li>
+                                        <li>
+                                            <strong>Last fail response:</strong>
+                                            <pre class="formatted">{{monitoringWallet.lastFailResponse}}</pre>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="infos col-12">
+                    <div class="card shadow-light overflow-hidden">
+                        <div class="table-responsive">
+                            <table class="table mb-0" id="logTable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="border-top:0px;">Name</th>
+                                        <th scope="col" style="border-top:0px;">Modified</th>
+                                        <th scope="col" style="border-top:0px;">Size</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each logs}}
+                                    <tr>
+                                        <td data-sort="{{@key}}">
+                                            <a href="{{this.link}}" target="_blank">
+                                                <strong class="text-uppercase">{{this.name}}</strong>
+                                            </a>
+                                            <code>({{@key}})</code>
+                                        </td>
+                                        <td data-sort="{{this.changed}}">{{this.changed}}</td>
+                                        <td data-sort="{{this.size}}">{{this.size}} bytes</td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-details row">
+        <div class="col-md-4 col-lg-3 footer-widget">
+          <a href="https://novasol.network" target="_blank"><img src="/img/logo-text.svg" class="logo mb-2"
+              alt="NovaSol"></a>
+        </div>
+        <div class="col-md-4 col-lg-3 offset-lg-3 footer-widget">
+          <h5 class="widget-title text-uppercase">Quick Links</h5>
+          <ul class="text-muted">
+            <li><a href="https://explorer.novasol.network" class="text-reset">Block Explorer</a></li>
+            <li><a href="https://pool.novasol.network" class="text-reset">Official Pool</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-lg-3 footer-widget pl-lg-5 pl-3">
+          <h6 class="widget-title text-uppercase">Get in touch</h6>
+          <div class="social text-muted">
+            <a href="https://discord.gg/7VzyputumB" class="discord text-reset" target="_blank"><i
+                class="fab fa-discord"></i></a>
+            <a href="https://twitter.com/NovaSolNetwork" class="twitter text-reset" target="_blank"><i
+                class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/NovaSolNetwork" class="instagram text-reset" target="_blank"><i
+                class="fab fa-instagram"></i></a>
+            <a href="https://github.com/NovaSolNetwork" class="github text-reset" target="_blank"><i
+                class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!--====== Javascript & Jquery ======-->
+  <script src="/config.js"></script>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/bootstrap.bundle.js"></script>
+  <script src="/vendor/mustache/mustache.min.js"></script>
+  <script src="/vendor/timeago/jquery.timeago.js"></script>
+  <script src="/vendor/handlebars/handlebars.min.js"></script>
+  <script src="/js/translate.min.js"></script>
+  <script src="/js/app.min.js"></script>
+  <script src="/js/admin/monitor.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>NovaSol ~ Market / Calculator</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta name="author" content="The NovaSol Developers">
+  <meta name="keywords" content="novasol, xns, cryptocurrency, private, fast, secure, mining, pool, miningpool">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google -->
+  <meta itemprop="name" content="NovaSol ~ Market / Calculator">
+  <meta itemprop="description" content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta itemprop="image" content="https://novasol.network/img/logo-banner-twitter.png">
+
+  <!-- Facebook -->
+  <meta property="og:url" content="https://pool.novasol.network/market">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="NovaSol ~ Market / Calculator">
+  <meta property="og:description" content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta property="og:image" content="https://novasol.network/img/logo-banner-twitter.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@NovaSolProject">
+  <meta name="twitter:title" content="NovaSol ~ Market / Calculator">
+  <meta name="twitter:description" content="Start solo mining or pool mining NovaSol on our Official Mining Pool. Be a part of the decentralized network!">
+  <meta name="twitter:image" content="https://novasol.network/img/logo-banner-twitter.png">
+
+  <link rel="shortcut icon" type="image/png" href="img/logo.svg">
+
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top justify-content-between mb-3">
+      <div class="container">
+        <a class="navbar-brand  translatable" href="/">
+          <img src="/img/logo-text.svg" alt="NovaSol">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link translatable" href="/" data-translate-key="dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link translatable" href="start" data-translate-key="gettingStarted">Getting Started</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link translatable" href="statistics" data-translate-key="yourStats">My Stats</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownDetails" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                data-translate-key="details">Details</a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownDetails" id="detailsMenu">
+                <a class="dropdown-item translatable" href="blocks" data-translate-key="poolBlocks">Pool Blocks</a>
+                <a class="dropdown-item translatable" href="payments" data-translate-key="payments">Payments</a>
+                <a class="dropdown-item translatable" href="top" data-translate-key="top10miners">Top 10 Miners</a>
+                <a class="dropdown-item translatable active" href="market" data-translate-key="market">Market /
+                  Calculator</a>
+                <a class="dropdown-item translatable" href="settings" data-translate-key="settings">Settings</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item translatable" href="faq" data-translate-key="faq">FAQ</a>
+              </div>
+            </li>
+            <li class="nav-item ml-md-4 d-none" id="langSelector"></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="statistics" class="statistics" style="padding-top: 6.25rem; padding-bottom: 2.25rem;">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="row align-items-center mb-4">
+              <div class="col">
+                <h6 class="m-0 font-weight-bold text-muted" data-translate-key="market"> Market / Calculator</h6>
+              </div>
+              <div class="col-auto">
+                <ul class="nav nav-pills d-none" id="blocksTabs" role="tablist"></ul>
+              </div>
+            </div>
+
+            <div class="tab-content d-none" id="blocksContent"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="calculator" class="calculator bg-light">
+      <div class="container" id="calculatorInner">
+
+      </div>
+    </section>
+
+    <script id="siblingTabTemplate" type="text/x-handlebars-template">
+            <li class="nav-item" id="blockTab{{coin}}">
+                <a class="nav-link {{active}}" id="{{coin}}-tab" data-toggle="tab" href="#{{coin}}" role="tab" aria-controls="{{coin}}" aria-selected="true" data-coin="{{coin}}">{{coin}} {{symbol}}</a>
+            </li>
+        </script>
+
+    <script id="siblingMarketTemplate" type="text/x-handlebars-template">
+            <div class="tab-pane {{active}}" id="{{coin}}" role="tabpanel" aria-labelledby="{{coin}}-tab">
+                <div id="marketStats{{coin}}">
+                    <div id="marketInfos{{coin}}" class="marketInfos row">
+                        <div class="col-12">
+                            <span class="fa fa-spinner fa-spin"></span> <span data-tkey="loadingMarket">Loading market prices</span> ...
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6 marketChart">
+                            <div class="card shadow-light">
+                                <div class="card-header font-weight-bold text-muted">
+                                    <h6 class="m-0">
+                                        <span data-translate-key="priceIn">Price in</span> <span id="priceChartCurrency{{coin}}">USD</span>
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart" style="height: 120px;">
+                                        <canvas id="chart{{coin}}_price"></canvas>
+                                        <a class="chart-style"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 marketChart">
+                            <div class="card shadow-light">
+                                <div class="card-header font-weight-bold text-muted">
+                                    <h6 class="m-0">
+                                        <span data-translate-key="hashPer">Hash/</span><span id="profitChartProfit{{coin}}">USD</span> <span data-toggle="tooltip" data-placement="top" data-original-title="Reward * Rate / Difficulty"><i class="fa fa-question-circle"></i></span>
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart" style="height:120px;">
+                                        <canvas id="chart{{coin}}_profit"></canvas>
+                                        <a class="chart-style"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+    <script id="siblingCalculatorTemplate" type="text/x-handlebars-template">
+            <div id="miningProfitCalc{{coin}}">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow-light">
+                            <div class="card-header font-weight-bold text-muted">
+                                <h6 class="m-0" data-translate-key="estimateProfit">Estimate Mining Profits</h6>
+                            </div>
+                            <div class="card-body" id="calcHashHolder">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="calcHashRate" data-translate-placeholder="enterYourHashrate" placeholder="Enter Your Hash Rate" aria-label="Enter Your Hash Rate">
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                                            <span id="calcHashUnit" data-mul="1">KH/s</span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right" id="calcHashUnits">
+                                            <a class="dropdown-item" href="#" data-mul="0">H/s</a>
+                                            <a class="dropdown-item" href="#" data-mul="1">KH/s</a>
+                                            <a class="dropdown-item" href="#" data-mul="2">MH/s</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+    <script id="calcHashResultTemplate" type="text/x-handlebars-template">
+            <div class="card-footer text-muted text-center no-border pt-4" id="calcHashResultsHolder{{coin}}">
+                <h5 class="font-weight-bold mb-1" id="calcHashAmount{{coin}}">
+                    <span id="calcHashAmount{{coin}}1"></span><br/><span id="calcHashAmount{{coin}}2"></span>
+                </h5>
+                <label class="font-size-sm text-muted mb-0" id="calcHashPeriod{{coin}}"><span data-translate-key="perDay">XNS / day</span></label>
+            </div>
+        </script>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-details row">
+        <div class="col-md-4 col-lg-3 footer-widget">
+          <a href="https://novasol.network" target="_blank"><img src="/img/logo-text.svg" class="logo mb-2"
+              alt="NovaSol"></a>
+        </div>
+        <div class="col-md-4 col-lg-3 offset-lg-3 footer-widget">
+          <h5 class="widget-title text-uppercase">Quick Links</h5>
+          <ul class="text-muted">
+            <li><a href="https://explorer.novasol.network" class="text-reset">Block Explorer</a></li>
+            <li><a href="https://pool.novasol.network" class="text-reset">Official Pool</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-lg-3 footer-widget pl-lg-5 pl-3">
+          <h6 class="widget-title text-uppercase">Get in touch</h6>
+          <div class="social text-muted">
+            <a href="https://discord.gg/7VzyputumB" class="discord text-reset" target="_blank"><i
+                class="fab fa-discord"></i></a>
+            <a href="https://twitter.com/NovaSolNetwork" class="twitter text-reset" target="_blank"><i
+                class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/NovaSolNetwork" class="instagram text-reset" target="_blank"><i
+                class="fab fa-instagram"></i></a>
+            <a href="https://github.com/NovaSolNetwork" class="github text-reset" target="_blank"><i
+                class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!--====== Javascript & Jquery ======-->
+  <script src="/config.js"></script>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/bootstrap.bundle.js"></script>
+  <script src="/vendor/mustache/mustache.min.js"></script>
+  <script src="/vendor/timeago/jquery.timeago.js"></script>
+  <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
+  <script src="/js/translate.min.js"></script>
+  <script src="/js/app.min.js"></script>
+  <script src="/js/market.min.js"></script>
+</body>
+
+</html>

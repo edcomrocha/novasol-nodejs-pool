@@ -1,0 +1,6 @@
+Hello,
+
+%MESSAGE%
+
+Thank you,
+Cheers, %POOL_HOST%
